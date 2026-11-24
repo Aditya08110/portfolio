@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Aditya K - Aspiring Data Scientist. Python, Core ML, Computer Vision and Data Analytics.">
+<title>Aditya K | Aspiring Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f6fb;--surface:#ffffff;--ink:#15132b;--mute:#55526e;--line:#15132b;
+  --navy:#15132b;--violet:#7c5cff;--cyan:#6ee3f7;--lime:#d9ff5b;--pink:#ff7aa8;
+  --shadow:6px 6px 0 var(--line);--radius:16px;
+  color-scheme:light;
+}
+[data-theme="dark"]{
+  --bg:#0f0d1e;--surface:#1b1834;--ink:#f3f1ff;--mute:#b3aed0;--line:#6ee3f7;
+  --navy:#07060f;--shadow:6px 6px 0 #6ee3f7;color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui,-apple-system,sans-serif;line-height:1.6;transition:background .3s,color .3s;
+background-image:radial-gradient(color-mix(in srgb,var(--ink) 12%,transparent) 1px,transparent 1px);background-size:22px 22px}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1140px;margin:auto;padding:0 6vw}
+.mono{font-family:"Space Mono",monospace}
+
+/* progress bar */
+#progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--lime));z-index:100}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:var(--navy);border-bottom:2px solid var(--cyan);color:#fff}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 6vw;max-width:1140px;margin:auto}
+.logo{width:44px;height:44px;border-radius:50%;border:2px solid var(--pink);display:grid;place-items:center;font-weight:700;text-decoration:none;color:#fff}
+.links{display:flex;gap:22px;list-style:none;margin:0;padding:0;overflow-x:auto}
+.links a{color:#fff;text-decoration:none;font-family:"Space Mono",monospace;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;opacity:.85}
+.links a:hover,.links a.active{color:var(--lime);opacity:1}
+.theme{background:none;border:2px solid var(--cyan);color:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-family:"Space Mono",monospace;font-size:.8rem;white-space:nowrap}
+.theme:hover{background:var(--cyan);color:var(--navy)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;padding:72px 0 64px}
+.badge{display:inline-block;background:var(--lime);color:#15132b;border:2px solid var(--line);padding:12px 22px;border-radius:14px;font-family:"Space Mono",monospace;font-weight:700;transform:rotate(-2deg);box-shadow:4px 4px 0 var(--line)}
+h1{font-size:clamp(3rem,8vw,5.6rem);line-height:.98;margin:24px 0 16px;font-weight:700;letter-spacing:-.02em}
+h1 .grad{background:linear-gradient(90deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.role{display:inline-flex;align-items:center;gap:10px;background:var(--cyan);color:#15132b;border:2px solid var(--line);padding:8px 18px;border-radius:10px;font-weight:700;font-size:1.05rem;box-shadow:var(--shadow)}
+.tagline{font-size:1.12rem;color:var(--mute);max-width:520px;margin:20px 0 28px;min-height:3.2em}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--violet);margin-left:3px;vertical-align:middle;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border:2px solid var(--line);border-radius:10px;text-decoration:none;font-weight:700;margin:0 12px 12px 0;background:var(--surface);color:var(--ink);box-shadow:4px 4px 0 var(--line);transition:transform .15s,box-shadow .15s;cursor:pointer;font-family:inherit;font-size:1rem}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}
+.btn.p{background:var(--violet);color:#fff;border-color:var(--line)}
+.btn.c{background:var(--lime);color:#15132b}
+.socials{display:flex;gap:12px;margin-top:8px}
+.socials a{width:44px;height:44px;border:2px solid var(--line);border-radius:12px;display:grid;place-items:center;text-decoration:none;background:var(--surface);transition:transform .15s,background .15s}
+.socials a:hover{transform:rotate(-6deg) scale(1.08);background:var(--lime)}
+.socials svg{width:20px;height:20px;fill:currentColor}
+
+/* photo */
+.photo{position:relative;justify-self:center;width:min(380px,85vw);aspect-ratio:4/5;animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+.photo .frame{position:absolute;inset:0;border-radius:50% 50% 46% 46%/42% 42% 58% 58%;background:var(--violet);transform:translate(16px,16px);border:2px solid var(--line)}
+.photo img{width:100%;height:100%;object-fit:cover;border-radius:50% 50% 46% 46%/42% 42% 58% 58%;border:6px solid var(--navy);position:relative;z-index:1;filter:saturate(1.05)}
+.sticker{position:absolute;background:var(--lime);color:#15132b;border:2px solid var(--line);border-radius:10px;padding:6px 12px;font-family:"Space Mono",monospace;font-weight:700;box-shadow:3px 3px 0 var(--line);z-index:2;font-size:.95rem}
+.sticker.c{background:var(--cyan)}.sticker.p{background:var(--pink)}
+.s1{top:-10px;right:-8px;transform:rotate(6deg);animation:wob 4s ease-in-out infinite}
+.s2{bottom:30px;left:-30px;transform:rotate(-8deg);animation:wob 5s ease-in-out infinite reverse}
+.s3{top:45%;right:-40px;animation:wob 6s ease-in-out infinite}
+@keyframes wob{50%{transform:rotate(0) translateY(-6px)}}
+
+/* ticker */
+.ticker{background:var(--navy);border-top:3px solid var(--pink);border-bottom:3px solid var(--pink);color:var(--cyan);font-family:"Space Mono",monospace;padding:16px 0;overflow:hidden;white-space:nowrap;letter-spacing:.1em;text-transform:uppercase}
+.ticker span{display:inline-block;padding-left:100%;animation:m 30s linear infinite}
+@keyframes m{to{transform:translateX(-100%)}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;padding:56px 0 8px}
+.stat{background:var(--surface);border:2px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);text-align:center}
+.stat b{font-size:2.4rem;display:block;color:var(--violet)}
+.stat span{color:var(--mute);font-size:.92rem}
+
+section{padding:88px 0}
+.sec-h{font-size:clamp(2rem,4.5vw,2.9rem);margin:0 0 12px;display:flex;align-items:center;gap:14px;letter-spacing:-.01em}
+.sec-h .n{font-family:"Space Mono",monospace;font-size:.85rem;background:var(--pink);color:#15132b;padding:4px 10px;border-radius:8px;border:2px solid var(--line)}
+.sub{color:var(--mute);margin:0 0 36px;max-width:640px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start}
+.about p{font-size:1.1rem;margin:0 0 16px}
+.hl{color:var(--violet);font-weight:700}
+.code{font-family:"Space Mono",monospace;background:var(--navy);color:var(--lime);padding:14px 18px;border-radius:12px;display:block;margin-top:18px;font-size:.92rem;border:2px solid var(--line)}
+.bars .bar{margin-bottom:18px}
+.bar-top{display:flex;justify-content:space-between;font-weight:500;margin-bottom:6px;font-size:.95rem}
+.bar-track{height:12px;background:var(--surface);border:2px solid var(--line);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--cyan));border-radius:999px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+
+/* skills */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:2px solid var(--line);border-radius:999px;padding:8px 16px;background:var(--surface);font-family:"Space Mono",monospace;font-size:.85rem;transition:transform .15s,background .15s;cursor:default}
+.chip:hover{transform:translateY(-3px);background:var(--lime);color:#15132b}
+.skill-group{margin-bottom:28px}
+.skill-group h3{margin:0 0 12px;font-size:1.05rem;color:var(--violet)}
+
+/* timeline */
+.tl{position:relative;padding-left:30px;border-left:3px solid var(--violet)}
+.tl-item{position:relative;margin-bottom:34px}
+.tl-item::before{content:"";position:absolute;left:-41px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--lime);border:3px solid var(--line)}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 4px;font-size:1.3rem}
+.meta{font-family:"Space Mono",monospace;font-size:.8rem;color:var(--mute);margin-bottom:12px}
+.card ul{padding-left:20px;margin:10px 0 0}
+.card li{margin-bottom:8px}
+.tags{margin-top:14px}
+.tag{display:inline-block;background:var(--cyan);color:#15132b;border:2px solid var(--line);border-radius:6px;padding:2px 10px;font-size:.78rem;margin:4px 6px 0 0;font-family:"Space Mono",monospace}
+.tag.v{background:var(--violet);color:#fff}.tag.l{background:var(--lime)}
+
+/* projects */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.filter{border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 16px;border-radius:999px;cursor:pointer;font-family:"Space Mono",monospace;font-size:.82rem}
+.filter.on{background:var(--violet);color:#fff}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.proj{display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.proj:hover{transform:translate(-4px,-4px);box-shadow:10px 10px 0 var(--line)}
+.proj .thumb{height:140px;border-radius:10px;border:2px solid var(--line);margin-bottom:18px;display:grid;place-items:center;font-family:"Space Mono",monospace;font-size:2.4rem;font-weight:700;color:#fff}
+.t1{background:linear-gradient(135deg,var(--violet),var(--cyan))}
+.t2{background:linear-gradient(135deg,#ff7aa8,var(--violet))}
+.proj p{color:var(--mute);margin:0}
+.proj .link{margin-top:auto;padding-top:16px;font-weight:700;text-decoration:none;color:var(--violet)}
+.proj .link:hover{text-decoration:underline}
+.hidden{display:none !important}
+
+/* publications / certs */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.pub .tag{margin-top:6px}
+
+/* resume */
+.rcard{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:linear-gradient(120deg,var(--surface),var(--surface)) padding-box;}
+.rcard p{margin:6px 0 0;color:var(--mute)}
+.rcard a.pl{color:var(--violet);font-weight:700}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cbox{display:flex;flex-direction:column;gap:6px}
+.cbox .lbl{font-family:"Space Mono",monospace;font-size:.78rem;color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
+.cbox .val{font-weight:700;font-size:1.05rem;word-break:break-all;text-decoration:none}
+.cbox .val:hover{color:var(--violet)}
+.copy{align-self:flex-start;margin-top:8px;padding:6px 12px;font-size:.85rem}
+.form input,.form textarea{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-family:inherit;font-size:1rem;margin-bottom:12px}
+.form textarea{min-height:110px;resize:vertical}
+
+/* footer / top */
+footer{background:var(--navy);color:#fff;padding:34px 6vw;border-top:3px solid var(--pink);text-align:center;font-family:"Space Mono",monospace;font-size:.85rem}
+footer a{color:var(--lime)}
+#top-btn{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:12px;border:2px solid var(--line);background:var(--lime);color:#15132b;font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:var(--shadow);z-index:60}
+#top-btn.show{opacity:1;pointer-events:auto}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:12px;border:2px solid var(--cyan);transition:transform .35s;z-index:70;font-family:"Space Mono",monospace;font-size:.85rem}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+@media (max-width:900px){
+  .hero,.about-grid,.two,.contact-grid{grid-template-columns:1fr}
+  .photo{order:-1}
+  .links{display:none}
+  .nav-in{justify-content:space-between}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="#top" aria-label="Home">AK</a>
+    <ul class="links" id="links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme" id="theme" aria-label="Toggle dark mode">🌙 Dark</button>
+  </div>
+</nav>
+
+<header class="wrap hero" id="top">
+  <div>
+    <span class="badge">Hello, I’m Aditya!!</span>
+    <h1>Aditya <span class="grad">K</span></h1>
+    <span class="role">⚡ Aspiring Data Scientist</span>
+    <p class="tagline"><span id="typed"></span><span class="caret"></span></p>
+    <div>
+      <a class="btn p" href="#projects">Explore My Work →</a>
+      <a class="btn" href="Aditya_Resume.pdf" download>⬇ Resume</a>
+      <a class="btn c" href="#contact">Contact Me</a>
+    </div>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/aditya-k-ds/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+      <a href="https://github.com/Aditya08110" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg></a>
+      <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=adityak081120004@gmail.com" target="_blank" rel="noopener" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M2 5h20v14H2zm2 2v.5l8 5 8-5V7z"/></svg></a>
+    </div>
+  </div>
+  <div class="photo">
+    <div class="frame"></div>
+    <img src="image.png" alt="Portrait of Aditya K">
+    <span class="sticker s1">{ }</span>
+    <span class="sticker c s2">*</span>
+    <span class="sticker p s3">01</span>
+  </div>
+</header>
+
+<div class="ticker"><span>Data Analytics • Machine Learning • Computer Vision • Python • OpenCV • Problem Solving • Continuous Learning •</span></div>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat reveal"><b data-count="100" data-plus="1">0</b><span>K+ feature descriptors processed</span></div>
+    <div class="stat reveal"><b data-count="60" data-plus="1">0</b><span>% fewer false detections</span></div>
+    <div class="stat reveal"><b data-count="70" data-plus="1">0</b><span>% less manual inspection</span></div>
+    <div class="stat reveal"><b data-count="2" data-plus="1">0</b><span>Internships in AI & data</span></div>
+  </div>
+</div>
+
+<section id="about" class="wrap">
+  <h2 class="sec-h reveal"><span class="n">01</span> About</h2>
+  <p class="sub reveal">A bit about how I think and what I build.</p>
+  <div class="about-grid">
+    <div class="about reveal">
+      <p>Hello, I’m <span class="hl">Aditya</span>, an aspiring data scientist with a curious mind and a passion for turning data and engineering problems into practical solutions.</p>
+      <p>I work across machine learning, data analytics and computer vision, from automated defect detection on factory boards to multimodal data pipelines for AI applications.</p>
+      <p>I’ve also co-authored a research paper on anomaly detection for PCB inspection, published in a Springer (Scopus-indexed) conference proceedings.</p>
+      <span class="code">const mindset = "curious, driven, always learning";</span>
+    </div>
+    <div class="card reveal">
+      <h3>Quick facts</h3>
+      <div class="meta">At a glance</div>
+      <ul>
+        <li>📍 Chennai, India</li>
+        <li>🎓 M.Tech Integrated (Data Science), SRM · 2027</li>
+        <li>🔬 Research paper at COMSYS 2026 (Springer)</li>
+        <li>💼 Open to internships and data science roles</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="wrap">
+  <h2 class="sec-h reveal"><span class="n">02</span> Education</h2>
+  <p class="sub reveal">Academic background.</p>
+  <div class="tl">
+    <div class="tl-item reveal">
+      <div class="card">
+        <h3>M.Tech (Integrated), Computer Science and Engineering</h3>
+        <div class="meta">SRM University Kattankulathur · Jun 2022 – May 2027</div>
+        <p style="margin:0">Specialization in Data Science.</p>
+        <div class="tags"><span class="tag v">Data Science</span><span class="tag">Machine Learning</span><span class="tag l">Computer Vision</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="wrap">
+  <h2 class="sec-h reveal"><span class="n">03</span> Skills</h2>
+  <p class="sub reveal">Tools and technologies I use day to day.</p>
+  <div class="skill-group reveal"><h3>Languages & Libraries</h3>
+    <div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span><span class="chip">Scikit-learn</span><span class="chip">OpenCV</span><span class="chip">SIFT</span></div></div>
+  <div class="skill-group reveal"><h3>Core Skills</h3>
+    <div class="chips"><span class="chip">Machine Learning</span><span class="chip">Computer Vision</span><span class="chip">Image Processing</span><span class="chip">OCR</span><span class="chip">Data Preprocessing</span><span class="chip">Feature Engineering</span><span class="chip">NLP</span></div></div>
+  <div class="skill-group reveal"><h3>Developer Tools</h3>
+    <div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">VS Code</span><span class="chip">Google Colab</span></div></div>
+</section>
+
+<section id="experience" class="wrap">
+  <h2 class="sec-h reveal"><span class="n">04</span> Experience</h2>
+  <p class="sub reveal">Internships where I built real systems.</p>
+  <div class="tl">
+    <div class="tl-item reveal">
+      <div class="card">
+        <h3>Technical Intern</h3>
+        <div class="meta">Bharat EMS Solutions Pvt. Ltd. · Chennai · Dec 2025 – Jan 2026</div>
+        <ul>
+          <li>Engineered an AI-powered Automated Optical Inspection (AOI) pipeline for PCB defect detection using Python, OpenCV, SIFT and One-Class SVM.</li>
+          <li>Processed 100K+ SIFT descriptors with Bag of Visual Words (BoVW) for automated anomaly detection.</li>
+          <li>Reduced false detections by 60–70% through HSV segmentation and morphological filtering.</li>
+          <li>Automated PCB defect localization, cutting manual inspection effort by 70–80%.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="card">
+        <h3>Data Engineering Intern</h3>
+        <div class="meta">Agilisium Consulting · Chennai · Jun 2025 – Jul 2025</div>
+        <ul>
+          <li>Developed AI-assisted workflows for multimodal text, image, audio and video processing using Python.</li>
+          <li>Performed data preprocessing, feature engineering and model validation for machine learning applications.</li>
+          <li>Collaborated on NLP workflows and data pipeline optimization to improve AI solution development.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="wrap">
+  <h2 class="sec-h reveal"><span class="n">05</span> Projects</h2>
+  <p class="sub reveal">Selected work. Use the filters to browse by area.</p>
+  <div class="filters reveal">
+    <button class="filter on" data-f="all">All</button>
+    <button class="filter" data-f="cv">Computer Vision</button>
+    <button class="filter" data-f="ml">Machine Learning</button>
+    <button class="filter" data-f="iot">IoT & Agriculture</button>
+  </div>
+  <div class="pgrid">
+    <article class="card proj reveal" data-cat="cv ml">
+      <div class="thumb t1">PCB</div>
+      <h3>AI-Powered PCB Defect Detection</h3>
+      <div class="meta">Python · OpenCV · SIFT · BoVW · One-Class SVM · Jan 2026</div>
+      <ul>
+        <li>Built an automated optical inspection pipeline using computer vision and machine learning.</li>
+        <li>Processed 100K+ feature descriptors across 100+ PCB images, reaching 85–90% detection accuracy.</li>
+        <li>Reduced manual inspection by 60–70% through automated defect localization.</li>
+      </ul>
+      <div class="tags"><span class="tag v">OpenCV</span><span class="tag">SIFT</span><span class="tag l">One-Class SVM</span></div>
+    </article>
+
+    <article class="card proj reveal" data-cat="iot ml">
+      <div class="thumb t2">AT</div>
+      <h3>AgroTwin AI: Digital Twin for Smart Irrigation</h3>
+      <div class="meta">AI · Digital Twin · Smart Irrigation · Crop Decision Support · 2026</div>
+      <ul>
+        <li>An AI-powered digital twin platform for smart irrigation and crop decision support.</li>
+        <li>Presented at the Third IEEE International Conference on Electronics, Communication, Computing and Control Technology (ICEECC 2026).</li>
+      </ul>
+      <div class="tags"><span class="tag v">Digital Twin</span><span class="tag">AI</span><span class="tag l">Smart Irrigation</span></div>
+    </article>
+  </div>
+</section>
+
+<section id="research" class="wrap">
+  <h2 class="sec-h reveal"><span class="n">06</span> Research & Certifications</h2>
+  <p class="sub reveal">Publications and credentials.</p>
+  <div class="two">
+    <div class="card pub reveal">
+      <h3>ROI-Centered Anomaly Detection for PCB Inspection</h3>
+      <div class="meta">COMSYS 2026 · Springer (Scopus Indexed Conference Proceedings)</div>
+      <span class="tag v">Publication</span>
+      <p style="margin-top:14px"><a class="pl" href="https://drive.google.com/file/d/1sJK3wZ4U_hZq_FmDbjJdpLobqNKVcm66/view?usp=drive_link" target="_blank" rel="noopener">View certificate →</a></p>
+    </div>
+    <div class="card pub reveal">
+      <h3>Data Science for Engineers</h3>
+      <div class="meta">NPTEL · 2025</div>
+      <span class="tag l">Certification</span>
+      <p style="margin-top:14px"><a class="pl" href="https://drive.google.com/file/d/14dMi4K0OIvDDeyCq-wcVVUox2EtxpJ_W/view?usp=drive_link" target="_blank" rel="noopener">View certificate →</a></p>
+    </div>
+    <div class="card pub reveal">
+      <h3>Conference Presentation: AgroTwin AI</h3>
+      <div class="meta">Third IEEE ICEECC 2026 · CMR Institute of Technology, Bengaluru · July 2026</div>
+      <span class="tag v">Presentation</span>
+      <p style="margin:14px 0 0;color:var(--mute)">Paper: “AgroTwin AI: An AI-Powered Digital Twin Platform for Smart Irrigation and Crop Decision Support.”</p>
+      <p style="margin-top:14px"><a class="pl" href="https://ieeexplore.ieee.org/document/11632997" target="_blank" rel="noopener">View paper on IEEE Xplore →</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="resume" class="wrap">
+  <h2 class="sec-h reveal"><span class="n">07</span> Resume</h2>
+  <p class="sub reveal">Download my full resume, or share this portfolio.</p>
+  <div class="card rcard reveal">
+    <div>
+      <h3 style="margin:0">Aditya K</h3>
+      <div class="meta" style="margin:6px 0 0">Aspiring Data Scientist · M.Tech Integrated CSE (Data Science) · SRM University</div>
+      <p>Portfolio: <a class="pl" href="https://aditya08110.github.io/portfolio/">aditya08110.github.io/portfolio</a></p>
+    </div>
+    <a class="btn p" href="Aditya_Resume.pdf" download>⬇ Download Resume (PDF)</a>
+  </div>
+</section>
+
+<section id="contact" class="wrap">
+  <h2 class="sec-h reveal"><span class="n">08</span> Contact</h2>
+  <p class="sub reveal">Open to internships, data science roles and research collaborations. Let’s talk.</p>
+  <div class="contact-grid">
+    <div class="card reveal">
+      <div class="cbox">
+        <span class="lbl">Email</span>
+        <a class="val" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=adityak081120004@gmail.com" target="_blank" rel="noopener">adityak081120004@gmail.com</a>
+        <button class="btn copy" data-copy="adityak081120004@gmail.com">📋 Copy email</button>
+      </div>
+      <div class="cbox" style="margin-top:20px">
+        <span class="lbl">Phone</span>
+        <a class="val" href="tel:+919499009768">+91 94990 09768</a>
+      </div>
+    </div>
+    <form class="card form reveal" id="cform">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <textarea name="message" placeholder="Your message" required></textarea>
+      <button class="btn p" type="submit">Send message ✉</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  © Aditya K · Built with care ·
+  <a href="https://www.linkedin.com/in/aditya-k-ds/" target="_blank" rel="noopener">LinkedIn</a> ·
+  <a href="https://github.com/Aditya08110" target="_blank" rel="noopener">GitHub</a>
+</footer>
+
+<button id="top-btn" aria-label="Back to top">↑</button>
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+// typing effect
+const phrases = ["Python • Core ML • Data Analytics", "Focused on real-world engineering problems", "Computer Vision • OpenCV • SIFT"];
+let pi = 0, ci = 0, del = false;
+const typed = document.getElementById("typed");
+function tick(){
+  const p = phrases[pi];
+  typed.textContent = del ? p.slice(0, ci--) : p.slice(0, ci++);
+  let d = del ? 35 : 70;
+  if (!del && ci > p.length){ del = true; d = 1400; }
+  else if (del && ci < 0){ del = false; ci = 0; pi = (pi + 1) % phrases.length; d = 300; }
+  setTimeout(tick, d);
+}
+tick();
+
+// theme toggle (remembered in this browser)
+const root = document.documentElement, tbtn = document.getElementById("theme");
+const saved = localStorage.getItem("theme");
+if (saved) root.setAttribute("data-theme", saved);
+function paintBtn(){ tbtn.textContent = root.getAttribute("data-theme") === "dark" ? "☀ Light" : "🌙 Dark"; }
+paintBtn();
+tbtn.onclick = () => {
+  const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  root.setAttribute("data-theme", next); localStorage.setItem("theme", next); paintBtn();
+};
+
+// reveal on scroll + bars + counters
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add("in");
+    e.target.querySelectorAll(".bar-fill").forEach(b => b.style.width = b.dataset.w + "%");
+    if (e.target.matches("[data-count], .stat")) {}
+    e.target.querySelectorAll("[data-count]").forEach(countUp);
+    io.unobserve(e.target);
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+function countUp(el){
+  const end = +el.dataset.count, start = performance.now(), dur = 1400;
+  (function step(now){
+    const t = Math.min((now - start) / dur, 1);
+    el.textContent = Math.round(end * (1 - Math.pow(1 - t, 3))) + (el.dataset.plus ? "+" : "");
+    if (t < 1) requestAnimationFrame(step);
+  })(start);
+}
+document.querySelectorAll(".stat b[data-count]").forEach(el => {
+  const o = new IntersectionObserver(([e]) => { if (e.isIntersecting){ countUp(el); o.disconnect(); } }, { threshold: 0.5 });
+  o.observe(el);
+});
+
+// project filters
+document.querySelectorAll(".filter").forEach(btn => btn.onclick = () => {
+  document.querySelectorAll(".filter").forEach(b => b.classList.remove("on"));
+  btn.classList.add("on");
+  const f = btn.dataset.f;
+  document.querySelectorAll(".proj").forEach(p => {
+    p.classList.toggle("hidden", f !== "all" && !p.dataset.cat.split(" ").includes(f));
+  });
+});
+
+// nav active link + progress + back to top
+const sections = [...document.querySelectorAll("section[id]")];
+const links = [...document.querySelectorAll("#links a")];
+const topBtn = document.getElementById("top-btn"), bar = document.getElementById("progress");
+window.addEventListener("scroll", () => {
+  const h = document.documentElement;
+  bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + "%";
+  topBtn.classList.toggle("show", h.scrollTop > 500);
+  let cur = "";
+  sections.forEach(s => { if (window.scrollY + 140 >= s.offsetTop) cur = s.id; });
+  links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + cur));
+}, { passive: true });
+topBtn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+// copy email
+const toast = document.getElementById("toast");
+document.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => {
+  navigator.clipboard?.writeText(b.dataset.copy).catch(()=>{});
+  toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 1800);
+});
+
+// contact form -> opens email client with the message
+document.getElementById("cform").addEventListener("submit", e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const body = `From: ${f.get("name")} (${f.get("email")})\n\n${f.get("message")}`;
+  window.open("https://mail.google.com/mail/?view=cm&fs=1&to=adityak081120004@gmail.com&su=" + encodeURIComponent("Portfolio enquiry from " + f.get("name")) + "&body=" + encodeURIComponent(body), "_blank", "noopener");
+});
+</script>
+</body>
+</html>
